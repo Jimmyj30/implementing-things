@@ -69,7 +69,20 @@ void init_hashmap(Hashmap* hashmap){
     init_buckets(hashmap->buckets, hashmap->capacity);
 }
 
-// perform the operation: hashmap[key] = val.
+void delete_buckets(Node** buckets, int capacity){
+    for (int i=0; i < capacity; ++i) {
+        // delete sentinel and all nodes after it
+        Node* p_traverse = buckets[i];
+        while (p_traverse != NULL){
+            Node* next = p_traverse->next;
+            free(p_traverse);
+            p_traverse = next;
+        }
+    }
+    free(buckets);
+}
+
+// insert or update key-value pair
 void insert(Hashmap* hashmap, int key, int val){
     double load = (double) hashmap->size / hashmap->capacity;
     if (load > MAX_LOAD_FACTOR) {
@@ -99,8 +112,7 @@ void insert(Hashmap* hashmap, int key, int val){
     p_traverse->next->entry.value = val;
 }
 
-// returns 0 if success, 1 otherwise
-// alters val on success.
+// get value for key, return 0 on success
 int get(Hashmap* hashmap, int key, int* val){
     int idx = key % hashmap->capacity;
     Node* list = hashmap->buckets[idx];
@@ -121,9 +133,7 @@ int get(Hashmap* hashmap, int key, int* val){
     return 0;  
 }
 
-// re-hashes the hashmap. Keeps size unchanged.
-// NOTE: LEAKS MEMORY!!!
-// TODO: implement delete of `Node**`.
+// double capacity and rehash all entries
 void resize(Hashmap* hashmap){
     int old_capacity = hashmap->capacity;
     Node** old_buckets = hashmap->buckets;
@@ -145,17 +155,7 @@ void resize(Hashmap* hashmap){
         }
     }
 
-    // delete everything in old_buckets.
-    for (int i=0; i < old_capacity; ++i) {
-        Node* p_traverse = old_buckets[i]->next;
-        while (p_traverse != NULL){
-            Node* next = p_traverse->next;
-            free(p_traverse);
-            p_traverse = next;
-        }
-        free(old_buckets[i]);
-    }
-    free(old_buckets);
+    delete_buckets(old_buckets, old_capacity);
 }
 
 int main(void) {
