@@ -145,8 +145,17 @@ void resize(Hashmap* hashmap){
         }
     }
 
-    // TODO: delete everything in old_buckets.
-    // traverse the list and delete all the nodes.
+    // delete everything in old_buckets.
+    for (int i=0; i < old_capacity; ++i) {
+        Node* p_traverse = old_buckets[i]->next;
+        while (p_traverse != NULL){
+            Node* next = p_traverse->next;
+            free(p_traverse);
+            p_traverse = next;
+        }
+        free(old_buckets[i]);
+    }
+    free(old_buckets);
 }
 
 int main(void) {
@@ -181,6 +190,10 @@ int main(void) {
         insert(&map, i, i);
     }
     print_hashmap(&map);
+
+    if(get(&map, 10, &value) == 0){
+        printf("FOUND! value: %d\n", value);
+    }
 
     return 0;
 }
