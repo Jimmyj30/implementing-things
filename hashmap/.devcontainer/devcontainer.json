@@ -1,0 +1,19 @@
+{
+    "name": "C Development",
+    "image": "mcr.microsoft.com/devcontainers/cpp:ubuntu-22.04",
+    "features": {
+        "ghcr.io/devcontainers/features/git:1": {}
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-vscode.cpptools",
+                "ms-vscode.cmake-tools",
+                "twxs.cmake"
+            ]
+        }
+    },
+    "forwardPorts": [],
+    "postCreateCommand": "sudo apt-get update && sudo apt-get install -y cmake && mkdir -p build && cd build && cmake .. && make",
+    "remoteUser": "vscode"
+}

@@ -3,27 +3,27 @@
 #include <stdlib.h>
 
 // ***** hashmap entry *****
-struct Entry {
+typedef struct Entry {
     int key;
     int value;
-} typedef Entry;
+} Entry;
 
 
 // ***** linked list node *****
-struct Node {
+typedef struct Node {
     Entry entry;
     struct Node* next;
-} typedef Node;
+} Node;
 
 
 // ***** struct for hashmap *****
-struct Hashmap {
+typedef struct Hashmap {
     // 1-D array of pointers to a LL. First element of the 
     // LL is a sentinel node. "actual" nodes come after.
     Node** buckets;
     int size; // number of keys in the map
     int capacity; // size of buckets array
-} typedef Hashmap;
+} Hashmap;
 
 
 void print_LL(Node* node){
