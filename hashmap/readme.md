@@ -17,4 +17,8 @@ ctest
 
 ## TODOs:
 
-Integrate Cmake, CTest, and devcontainers
+Integrate: 
+
+- [ ] Cmake
+- [ ] CTest
+- [x] devcontainers
