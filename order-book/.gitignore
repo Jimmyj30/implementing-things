@@ -1,0 +1,19 @@
+# Ignore build directory
+/build/
+/build*/
+
+# Ignore CMake files
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+
+# Ignore executables and object files
+*.out
+*.o
+*.obj
+*.exe
+*.a
+*.so
+*.dll
+*.dylib
