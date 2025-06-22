@@ -17,3 +17,6 @@ Makefile
 *.so
 *.dll
 *.dylib
+
+# Ignore clangd cache directory (language server cache files)
+.cache/clangd/

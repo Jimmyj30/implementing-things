@@ -1,14 +1,14 @@
 {
   "name": "C++ DevContainer",
   "image": "mcr.microsoft.com/devcontainers/cpp:0-ubuntu-22.04",
-  "customizations": {
-    "vscode": {
-      "extensions": ["ms-vscode.cpptools"]
-    }
-  },
+  "extensions": [
+    "ms-vscode.cmake-tools",
+    "llvm-vs-code-extensions.vscode-clangd"
+  ],
+  "platform": "linux/arm64",
   "features": {},
   "mounts": [],
   // postCreateCommand: useful for installing packages or "convenience" commands like git autocompletion
-  "postCreateCommand": "",
+  "postCreateCommand": "bash .devcontainer/setup.sh",
   "remoteUser": "vscode"
 }
